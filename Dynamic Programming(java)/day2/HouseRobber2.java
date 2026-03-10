@@ -1,0 +1,30 @@
+
+
+public class HouseRobber2 {
+    static int robHelp(int[] nums) {
+        if(nums.length==1) return nums[0];
+        if(nums.length==2) return Math.max(nums[0],nums[1]);
+        int dp[]=new int[nums.length];
+        dp[0]=nums[0];
+        dp[1]=Math.max(nums[0],nums[1]);
+        for(int i=2;i<nums.length;i++){
+            dp[i]=Math.max(nums[i]+dp[i-2],dp[i-1]);
+        }
+        return dp[nums.length-1];
+    }
+    static int rob(int []nums){
+        if(nums.length==0) return 0;
+        if(nums.length==1) return nums[0];
+        int arr1[]=new int[nums.length-1];
+        int arr2[]=new int[nums.length-1];
+        for(int i=0;i<nums.length-1;i++){
+            arr1[i]=nums[i];
+            arr2[i]=nums[i+1];
+        }
+        return Math.max(robHelp(arr1),robHelp(arr2));
+    }
+    public static void main(String[] args) {
+        int nums[]={10,50,54,21};
+        System.out.println(rob(nums));
+    }
+}
